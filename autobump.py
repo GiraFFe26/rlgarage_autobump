@@ -30,10 +30,6 @@ def bumping():
         chromeOptions.add_argument("disable-infobars")
         driver = webdriver.Chrome(options=chromeOptions)
         driver.get('https://rocket-league.com/login')
-        try:
-            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, 'acceptPrivacyPolicy')))
-        except TimeoutException:
-            time.sleep(delay)
         driver.find_element(By.ID, 'acceptPrivacyPolicy').click()
         driver.find_element(By.NAME, 'email').send_keys(mail)
         driver.find_element(By.NAME, 'password').send_keys(password)
@@ -47,8 +43,7 @@ def bumping():
             try:
                 driver.find_element(By.XPATH, f'/html/body/main/section/div/div/div[3]/div/div[4]/div[{trade}]/div[2]/button').click()
             except ElementClickInterceptedException:
-                print('ERROR IN LOADING SOME PAGE SOURCE!')
-                continue
+                pass
             try:
                 WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/span/i')))
             except TimeoutException:
@@ -56,8 +51,7 @@ def bumping():
             try:
                 driver.find_element(By.XPATH, '/html/body/div[2]/div/span/i').click()
             except ElementClickInterceptedException:
-                print('ERROR IN LOADING SOME PAGE SOURCE!')
-                continue
+                pass
         driver.quit()
         time.sleep(random.randint(910, 1000))
 
