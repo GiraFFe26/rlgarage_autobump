@@ -6,7 +6,7 @@ import random
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, WebDriverException
 
 
 def bumping():
@@ -28,7 +28,10 @@ def bumping():
         chromeOptions.add_argument("--disable-extensions")
         chromeOptions.add_argument("--disable-gpu")
         chromeOptions.add_argument("disable-infobars")
-        driver = webdriver.Chrome(options=chromeOptions)
+        try:
+            driver = webdriver.Chrome(options=chromeOptions)
+        except WebDriverException:
+            driver = webdriver.Chrome(options=chromeOptions)
         driver.get('https://rocket-league.com/login')
         driver.find_element(By.ID, 'acceptPrivacyPolicy').click()
         driver.find_element(By.NAME, 'email').send_keys(mail)
@@ -62,4 +65,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
