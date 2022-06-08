@@ -40,15 +40,17 @@ def bumping():
         driver.get(driver.find_element(By.XPATH, '/html/body/header/section[1]/div/div[4]/div/a').get_attribute('href'))
         y = 1200
         for trade in range(1, trades + 1):
-            driver.execute_script("window.scrollTo(0, " + str(y) + ")")
+            driver.execute_script(f"window.scrollTo(0,{y})")
             y += 480
             time.sleep(1)
             try:
-                driver.find_element(By.XPATH, f'/html/body/main/section/div/div/div[3]/div/div[4]/div[{trade}]/div[2]/button').click()
+                driver.find_element(By.XPATH, f'/html/body/main/section/div/div/div[3]/div/'
+                                              f'div[4]/div[{trade}]/div[2]/button').click()
             except ElementClickInterceptedException:
                 pass
             try:
-                WebDriverWait(driver, delay).until(ec.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/span/i')))
+                WebDriverWait(driver, delay).until(ec.presence_of_element_located((By.XPATH, '/html/body'
+                                                                                             '/div[2]/div/span/i')))
             except TimeoutException:
                 time.sleep(delay)
             try:
@@ -65,3 +67,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    
