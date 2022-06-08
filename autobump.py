@@ -4,7 +4,7 @@ import time
 from fake_useragent import UserAgent
 import random
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, WebDriverException
 
@@ -15,23 +15,23 @@ def bumping():
     mail, password = 'username', 'password'
     ua = UserAgent()
     while True:
-        chromeOptions = webdriver.ChromeOptions()
-        chromeOptions.add_argument("--no-sandbox")
-        chromeOptions.add_argument(f"user-agent={ua.random}")
-        chromeOptions.add_argument("--headless")
-        chromeOptions.add_argument("window-size=1920x1080")
-        chromeOptions.add_argument("--disable-dev-shm-usage")
-        chromeOptions.add_argument("--ignore-certificate-errors")
-        chromeOptions.add_argument("--disable-blink-features=AutomationControlled")
-        chromeOptions.add_argument("--log-level=1")
-        chromeOptions.add_argument("--disable-setuid-sandbox")
-        chromeOptions.add_argument("--disable-extensions")
-        chromeOptions.add_argument("--disable-gpu")
-        chromeOptions.add_argument("disable-infobars")
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument(f"user-agent={ua.random}")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("window-size=1920x1080")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--ignore-certificate-errors")
+        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_argument("--log-level=1")
+        chrome_options.add_argument("--disable-setuid-sandbox")
+        chrome_options.add_argument("--disable-extensions")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("disable-infobars")
         try:
-            driver = webdriver.Chrome(options=chromeOptions)
+            driver = webdriver.Chrome(options=chrome_options)
         except WebDriverException:
-            driver = webdriver.Chrome(options=chromeOptions)
+            driver = webdriver.Chrome(options=chrome_options)
         driver.get('https://rocket-league.com/login')
         driver.find_element(By.ID, 'acceptPrivacyPolicy').click()
         driver.find_element(By.NAME, 'email').send_keys(mail)
@@ -48,7 +48,7 @@ def bumping():
             except ElementClickInterceptedException:
                 pass
             try:
-                WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/span/i')))
+                WebDriverWait(driver, delay).until(ec.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/span/i')))
             except TimeoutException:
                 time.sleep(delay)
             try:
