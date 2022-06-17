@@ -2,7 +2,6 @@ from selenium import webdriver
 import chromedriver_binary
 import time
 from fake_useragent import UserAgent
-import random
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
@@ -58,7 +57,7 @@ def bumping():
             except ElementClickInterceptedException:
                 pass
         driver.quit()
-        time.sleep(random.randint(910, 1000))
+        time.sleep(910)
 
 
 def main():
