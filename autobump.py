@@ -36,6 +36,11 @@ def bumping():
         driver.find_element(By.NAME, 'email').send_keys(mail)
         driver.find_element(By.NAME, 'password').send_keys(password)
         driver.find_element(By.NAME, 'submit').click()
+        try:
+            WebDriverWait(driver, delay).until(ec.presence_of_element_located((By.XPATH, '/html/body/header/section'
+                                                                                         '[1]/div/div[4]/div/a')))
+        except TimeoutException:
+            time.sleep(delay)
         driver.get(driver.find_element(By.XPATH, '/html/body/header/section[1]/div/div[4]/div/a').get_attribute('href'))
         y = 1200
         for trade in range(1, trades + 1):
